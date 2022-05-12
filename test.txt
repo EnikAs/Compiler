@@ -1,0 +1,58 @@
+jmp skipf0x5626d4993030
+Factorial:
+  pop cx
+  pop [bx+0]
+  push cx
+  push [bx+0]
+  push 1.000000
+  jbl relt0x5626d4992bb0
+  push 0
+  jmp rels0x5626d4992bb0
+relt0x5626d4992bb0:
+  push 1
+rels0x5626d4992bb0:
+  push 0
+  jne if_t0x5626d4992af0:
+  jmp if_e0x5626d4992af0
+if_t0x5626d4992af0:
+  push 1.000000
+  pop ax
+  ret
+if_e0x5626d4992af0:
+  push [bx+0]
+  push [bx+0]
+  push 1.000000
+  sub
+  push bx
+  push 1
+  add
+  pop bx
+  call Factorial
+  push bx
+  push 1
+  sub
+  pop bx
+  push ax
+  mul
+  pop ax
+  ret
+skipf0x5626d4993030:
+  push 4.000000
+  pop [bx+0]
+  in
+  pop [bx+0]
+  push [bx+0]
+  push bx
+  push 1
+  add
+  pop bx
+  call Factorial
+  push bx
+  push 1
+  sub
+  pop bx
+  push ax
+  pop [bx+0]
+  push [bx+0]
+  out
+hlt

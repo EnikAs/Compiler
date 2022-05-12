@@ -1,0 +1,963 @@
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x1B0C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A2C0 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041EFDB in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 5 0x0041E839 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 6 0x0041EB1F in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 7 0x0041E839 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 8 0x0041E6FF in C:\VSCprogs\Language\Language\langg.exe: GetG()
+# 9 0x0043C53B in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:00:43, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:00:46
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x298C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A2B0 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041EC1E in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 5 0x0041E839 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 6 0x0041EB15 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 7 0x0041E839 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 8 0x0041E6FF in C:\VSCprogs\Language\Language\langg.exe: GetG()
+# 9 0x0043C52B in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:02:45, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:02:47
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0xB80 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A2A0 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F833 in C:\VSCprogs\Language\Language\langg.exe: Require()
+# 5 0x0041E943 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 6 0x0041E845 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 7 0x0041E867 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 8 0x0041EB21 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 9 0x0041E845 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#10 0x0041E70B in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#11 0x0043C51B in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:04:51, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:04:53
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x1E48 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A268 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F7FA in C:\VSCprogs\Language\Language\langg.exe: Require()
+# 5 0x0041E90A in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 6 0x0041E843 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 7 0x0041E865 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 8 0x0041EAE8 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 9 0x0041E843 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#10 0x0041E709 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#11 0x0043C4E3 in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:06:09, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:06:10
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x26E4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A268 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F7FA in C:\VSCprogs\Language\Language\langg.exe: Require()
+# 5 0x0041E95D in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 6 0x0041E843 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 7 0x0041E865 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 8 0x0041EAE8 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 9 0x0041E843 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#10 0x0041E709 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#11 0x0043C4E3 in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:06:09, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:07:22
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x2998 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A268 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041DB21 in C:\VSCprogs\Language\Language\langg.exe: GetTokens()
+# 5 0x0041D82F in C:\VSCprogs\Language\Language\langg.exe: GetAllTokens()
+# 6 0x0043C47C in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:07:42, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:07:43
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0xA0C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A268 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041DB21 in C:\VSCprogs\Language\Language\langg.exe: GetTokens()
+# 5 0x0041D82F in C:\VSCprogs\Language\Language\langg.exe: GetAllTokens()
+# 6 0x0043C47C in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:07:42, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:08:14
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x2F0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A268 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F7FA in C:\VSCprogs\Language\Language\langg.exe: Require()
+# 5 0x0041E95D in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 6 0x0041E843 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 7 0x0041E865 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 8 0x0041EAE8 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 9 0x0041E843 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#10 0x0041E709 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#11 0x0043C4E3 in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:07:42, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:08:48
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x24AC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A274 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F809 in C:\VSCprogs\Language\Language\langg.exe: Require()
+# 5 0x0041E96C in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 6 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 7 0x0041E874 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 8 0x0041EAF7 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 9 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#10 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#11 0x0043C4EF in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:09:59, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:10:01
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0xFA8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A274 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F809 in C:\VSCprogs\Language\Language\langg.exe: Require()
+# 5 0x0041E96C in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 6 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 7 0x0041E874 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 8 0x0041EAF7 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 9 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#10 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#11 0x0043C4EF in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:10:25, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:10:27
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x1998 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A274 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F809 in C:\VSCprogs\Language\Language\langg.exe: Require()
+# 5 0x0041E96C in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 6 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 7 0x0041EAF7 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 8 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 9 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#10 0x0043C4EF in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:10:25, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:11:44
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x1CBC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A274 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F809 in C:\VSCprogs\Language\Language\langg.exe: Require()
+# 5 0x0041E96C in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 6 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 7 0x0041EAF7 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+# 8 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+# 9 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#10 0x0043C4EF in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:10:25, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:12:43
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x1740 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A294 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F796 in C:\VSCprogs\Language\Language\langg.exe: SyntaxERROR()
+# 5 0x0041F445 in C:\VSCprogs\Language\Language\langg.exe: GetN()
+# 6 0x0041F31B in C:\VSCprogs\Language\Language\langg.exe: GetP()
+# 7 0x0041F0F0 in C:\VSCprogs\Language\Language\langg.exe: GetT()
+# 8 0x0041EFD7 in C:\VSCprogs\Language\Language\langg.exe: GetE()
+# 9 0x0041EC0C in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#10 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#11 0x0041EB15 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#12 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#13 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#14 0x0043C50F in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:12:46, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:12:49
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x828 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A294 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F796 in C:\VSCprogs\Language\Language\langg.exe: SyntaxERROR()
+# 5 0x0041F445 in C:\VSCprogs\Language\Language\langg.exe: GetN()
+# 6 0x0041F31B in C:\VSCprogs\Language\Language\langg.exe: GetP()
+# 7 0x0041F0F0 in C:\VSCprogs\Language\Language\langg.exe: GetT()
+# 8 0x0041EFD7 in C:\VSCprogs\Language\Language\langg.exe: GetE()
+# 9 0x0041EC0C in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#10 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#11 0x0041EB15 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#12 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#13 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#14 0x0043C50F in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:12:46, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:13:19
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x109C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A2B8 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F7BC in C:\VSCprogs\Language\Language\langg.exe: SyntaxERROR()
+# 5 0x0041F46B in C:\VSCprogs\Language\Language\langg.exe: GetN()
+# 6 0x0041F341 in C:\VSCprogs\Language\Language\langg.exe: GetP()
+# 7 0x0041F116 in C:\VSCprogs\Language\Language\langg.exe: GetT()
+# 8 0x0041EFFD in C:\VSCprogs\Language\Language\langg.exe: GetE()
+# 9 0x0041EC32 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#10 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#11 0x0041EB3B in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#12 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#13 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#14 0x0043C533 in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:13:22, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:13:25
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x748 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A2B8 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F7BC in C:\VSCprogs\Language\Language\langg.exe: SyntaxERROR()
+# 5 0x0041F46B in C:\VSCprogs\Language\Language\langg.exe: GetN()
+# 6 0x0041F341 in C:\VSCprogs\Language\Language\langg.exe: GetP()
+# 7 0x0041F116 in C:\VSCprogs\Language\Language\langg.exe: GetT()
+# 8 0x0041EFFD in C:\VSCprogs\Language\Language\langg.exe: GetE()
+# 9 0x0041EC32 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#10 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#11 0x0041EB3B in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#12 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#13 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#14 0x0043C533 in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:14:03, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:14:04
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x18AC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A2B8 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F7BC in C:\VSCprogs\Language\Language\langg.exe: SyntaxERROR()
+# 5 0x0041F46B in C:\VSCprogs\Language\Language\langg.exe: GetN()
+# 6 0x0041F341 in C:\VSCprogs\Language\Language\langg.exe: GetP()
+# 7 0x0041F116 in C:\VSCprogs\Language\Language\langg.exe: GetT()
+# 8 0x0041EFFD in C:\VSCprogs\Language\Language\langg.exe: GetE()
+# 9 0x0041EC32 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#10 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#11 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#12 0x0043C533 in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:14:03, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:14:22
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x2B98 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A2B8 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F7BC in C:\VSCprogs\Language\Language\langg.exe: SyntaxERROR()
+# 5 0x0041F46B in C:\VSCprogs\Language\Language\langg.exe: GetN()
+# 6 0x0041F341 in C:\VSCprogs\Language\Language\langg.exe: GetP()
+# 7 0x0041F116 in C:\VSCprogs\Language\Language\langg.exe: GetT()
+# 8 0x0041EFFD in C:\VSCprogs\Language\Language\langg.exe: GetE()
+# 9 0x0041EC32 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#10 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#11 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#12 0x0043C533 in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:14:25, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:14:27
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x220C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A2B8 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F7BC in C:\VSCprogs\Language\Language\langg.exe: SyntaxERROR()
+# 5 0x0041F46B in C:\VSCprogs\Language\Language\langg.exe: GetN()
+# 6 0x0041F341 in C:\VSCprogs\Language\Language\langg.exe: GetP()
+# 7 0x0041F116 in C:\VSCprogs\Language\Language\langg.exe: GetT()
+# 8 0x0041EFFD in C:\VSCprogs\Language\Language\langg.exe: GetE()
+# 9 0x0041EC32 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#10 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#11 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#12 0x0043C533 in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:14:25, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:14:56
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x2564 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A2B8 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F7BC in C:\VSCprogs\Language\Language\langg.exe: SyntaxERROR()
+# 5 0x0041F46B in C:\VSCprogs\Language\Language\langg.exe: GetN()
+# 6 0x0041F341 in C:\VSCprogs\Language\Language\langg.exe: GetP()
+# 7 0x0041F116 in C:\VSCprogs\Language\Language\langg.exe: GetT()
+# 8 0x0041EFFD in C:\VSCprogs\Language\Language\langg.exe: GetE()
+# 9 0x0041EC32 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#10 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#11 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#12 0x0043C533 in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:14:58, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:15:00
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x2230 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A2B8 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041F7BC in C:\VSCprogs\Language\Language\langg.exe: SyntaxERROR()
+# 5 0x0041F46B in C:\VSCprogs\Language\Language\langg.exe: GetN()
+# 6 0x0041F341 in C:\VSCprogs\Language\Language\langg.exe: GetP()
+# 7 0x0041F116 in C:\VSCprogs\Language\Language\langg.exe: GetT()
+# 8 0x0041EFFD in C:\VSCprogs\Language\Language\langg.exe: GetE()
+# 9 0x0041EC32 in C:\VSCprogs\Language\Language\langg.exe: GetStmt()
+#10 0x0041E852 in C:\VSCprogs\Language\Language\langg.exe: GetStmts()
+#11 0x0041E718 in C:\VSCprogs\Language\Language\langg.exe: GetG()
+#12 0x0043C533 in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 19:14:58, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 19:19:37
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\VSCprogs\Language\Language\langg.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400], Instance: 0x004A7ADC (32-bit), Flags: Cmdre0, Thread: 0x35C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042A1A4 in C:\VSCprogs\Language\Language\langg.exe: (anonymous namespace)::TX::_txOnSignal()
+# 1 0x763C71F1 in C:\Windows\System32\msvcrt.dll: raise()
+# 2 0x763CB69B in C:\Windows\System32\msvcrt.dll: abort()
+# 3 0x763C802A in C:\Windows\System32\msvcrt.dll: assert()
+# 4 0x0041D879 in C:\VSCprogs\Language\Language\langg.exe: GetAllTokens()
+# 5 0x0043C3B8 in C:\VSCprogs\Language\Language\langg.exe: main()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-10-03 23:49:44 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\TXLib\TX\TXLib.h
+Compiled:	Dec 19 2021 20:20:00, GNU g++ 6.3.0, std=201402L, MinGW Runtime 5.0, 32-bit, Debug
+Started:	Dec 19 2021 20:20:07
+
+Run file:	C:\VSCprogs\Language\Language\langg.exe
+Directory:	C:\VSCprogs\Language\Language
+
+--------------------------------------------------

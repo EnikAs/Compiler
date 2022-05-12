@@ -1,0 +1,16 @@
+factorial(x)
+{
+    tortbl (x <= 1)
+    {
+        zvOnit 1; 
+    }
+        zvOnit x * factorial(x - 1);
+    
+}
+
+x = 5;
+scan(x);
+x = factorial(x);
+print(x);
+
+$

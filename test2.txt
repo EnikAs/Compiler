@@ -1,0 +1,79 @@
+a = 0;
+b = 0;
+c = 0;
+ans = 0;
+discr = 0;
+scan(b);
+scan(c);
+tortbl (a == 0)
+{
+    solve_linear(b, c);
+}
+lattE
+{
+    discr = b*b - 4*a*c;
+
+    tortbl (discr == 0)
+    {
+        ans = (0 - 1) * b / (2 * a);
+
+        tortbl (b == 0)
+        {
+            print(0);
+        }
+        lattE
+        {
+            print(ans);
+        }
+    }
+    lattE
+    {
+        tortbl(discr > 0)
+        {
+            discr = sqrt(discr);
+
+            ans = ((0 - 1) * b + discr) / (2 * a);
+            print(ans);
+            ans = ((0 - 1) * b - discr) / (2 * a);
+            print(ans);
+        }
+        lattE
+        {
+            print(2);
+            print(2);
+            print(8);
+        }
+    }
+}
+
+solve_linear(b, c)
+{
+    tortbl (b == 0)
+    {
+        tortbl (c == 0)
+        {
+            print(2);
+            print(2);
+            print(8);
+        }
+        lattE
+        {
+            print(14);
+            print(8);
+            print(8);
+        }
+    }
+    lattE 
+    {
+        tortbl (c == 0)
+        {
+            print(0);
+        }
+        lattE 
+        {
+            b = (1 - 2) * b / c;
+            print(b);
+        }
+    }
+}
+$

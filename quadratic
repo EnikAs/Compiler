@@ -1,0 +1,50 @@
+a = 1;
+b = 1;
+c = 1;
+
+var = 0;
+scan(a);
+scan(b);
+scan(c);
+
+tortbl (a == 0)
+{
+    tortbl (c == 0)
+    {
+        var = 0;
+        print(var);
+    }
+    lattE
+    {
+        tortbl (b != 0)
+        {
+            var = (0 - 1) * c / b;
+            print(var);
+        }
+        lattE
+        {
+            var = 228;
+            print(var);
+        }
+    }
+}
+lattE
+{
+    disc = b * b - 4 * a * c;
+
+    tortbl (disc >= 0 )
+    {
+        var = ((0 - 1)* b + sqrt(disc))/ (2 * a);
+        printf(var);
+        var = ((0 - 1)* b - sqrt(disc))/ (2 * a);
+        print(var);
+    }
+    lattE
+    {
+        print(1488);
+    }
+}
+
+
+
+$
