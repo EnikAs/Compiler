@@ -4,7 +4,7 @@ static      void         buffer_clean            (char* buffer);
 static      int          VisitDumpPrint          (const Node* node);
 static      void         trash_skip              (const char* buffer, int* buf_pos, int key);
 
-FILE* log_file = fopen("logfile.txt", "w");
+FILE* log_file = fopen("logfile.dot", "w");
 
 int VisitPrintFileIN(const Node* node, FILE* treefile)
 {
@@ -126,7 +126,7 @@ int TreeDump (Node* node)
     
     fclose(log_file);
 
-    system ("\"C:/Program Files/Graphviz/bin/dot.exe\" -Tpng logfile.txt -o graph.png");
+    system ("dot -Tpng logfile.dot -o graph.png");
 }
 
 int TreeSetNode (Node* node, double data, Node* leftptr, Node* rightptr)

@@ -228,23 +228,23 @@ int     get_word    (buffer* buf, tkn_arr* tk_array)
             return cunt;
         }
 
-    else if (strncmp($CUR_TKN_DATA_STR, "tortbl", 6) == EQUAL)
+    else if (strncmp($CUR_TKN_DATA_STR, "tortbl", 6) == EQUAL) //tortbl
     {
         $CUR_TKN_DATA_TYP = IF;
     }
-    else if (strncmp($CUR_TKN_DATA_STR, "pinzhak", 7) == EQUAL)
+    else if (strncmp($CUR_TKN_DATA_STR, "pinzhak", 7) == EQUAL) //pinzhak
     {
         $CUR_TKN_DATA_TYP = WHILE;
     }
-    else if (strncmp($CUR_TKN_DATA_STR, "lattE", 5) == EQUAL)
+    else if (strncmp($CUR_TKN_DATA_STR, "lattE", 5) == EQUAL) //lattE
     {
         $CUR_TKN_DATA_TYP = ELSE;
     }
-    else if (strncmp($CUR_TKN_DATA_STR, "zvOnit", 6) == EQUAL)
+    else if (strncmp($CUR_TKN_DATA_STR, "zvOnit", 6) == EQUAL) //zvOnit
     {
         $CUR_TKN_DATA_TYP = RETURN;
     }
-    else if (strncmp($CUR_TKN_DATA_STR, "lOzhit'", 6) == EQUAL)
+    else if (strncmp($CUR_TKN_DATA_STR, "lOzhit'", 6) == EQUAL) // lOzhit'
     {
         $CUR_TKN_DATA_TYP = OPERATOR;
         $CUR_TKN_DATA_CHR = '=';
@@ -780,7 +780,7 @@ Node* CreateNode (int node_type)
     return node;
 }
 //==========================================================================
-#include "rev_frontend.h"
+//#include "rev_frontend.h"
 
 int VisitPrintTree (Node* node)
 {

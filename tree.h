@@ -1,5 +1,6 @@
 #ifndef TREE_H_INCLUDED
 #define TREE_H_INCLUDED
+
 #include <iostream>
 #include <iostream>
 #include <cstring>
@@ -7,7 +8,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <cassert>
-#include <sys\stat.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 typedef char* telem_t;
 
@@ -84,7 +86,7 @@ enum trash_skip_key
 
 union union_node_data
 {
-    double  dbl = 0; // db - define bytes нужно dbl
+    double  dbl = 0;
     char    ch;
     char*   str;
 };
@@ -101,7 +103,6 @@ struct Node
 struct Tree
 {
     Node* peak = NULL;
-
 };
 
 int     VisitPrintFileIN         (const Node* node, FILE* treefile);

@@ -1,16 +1,12 @@
-factorial(x)
-{
-    tortbl (x <= 1)
+x = 10;
+
+pinzhak (x >= 1)
     {
-        zvOnit 1; 
+        x = x - 1; 
     }
-        zvOnit x * factorial(x - 1);
-    
-}
 
 x = 5;
-scan(x);
-x = factorial(x);
-print(x);
 
+a = 10;
+b = 4194303 / 4194303 + 10 * 1123 - 10*1123 + 1 / 1;
 $
