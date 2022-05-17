@@ -37,81 +37,81 @@ int VisitDumpPrint(const Node* node)
         return 0; // TODO Errors
     if (node->data_type == CONSTANT)
     {
-        fprintf(log_file, "%d [label =\"%.0lf\", style = \"filled\", color = \"blue\"];\n", node, node->data.dbl);
+        fprintf(log_file, "%llu [label =\"%.0lf\", style = \"filled\", color = \"blue\"];\n", (unsigned long long)node, node->data.dbl);
     }
     else if (node->data_type == OPERATOR)
     {
-        fprintf(log_file, "%d [label =\"%c\", style = \"filled\", color = \"orange\"];\n", node, node->data.ch);
+        fprintf(log_file, "%llu [label =\"%c\", style = \"filled\", color = \"orange\"];\n", (unsigned long long)node, node->data.ch);
     }
     else if (node->data_type == WHILE)
     {
-        fprintf(log_file, "%d [label =\"while\"];\n", node);
+        fprintf(log_file, "%llu [label =\"while\"];\n", (unsigned long long)node);
     }
     else if (node->data_type == IF)
     {
-        fprintf(log_file, "%d [label =\"if\"];\n", node);
+        fprintf(log_file, "%llu [label =\"if\"];\n", (unsigned long long)node);
     }
     else if (node->data_type == ELSE)
     {
-        fprintf(log_file, "%d [label =\"else\"];\n", node);
+        fprintf(log_file, "%llu [label =\"else\"];\n", (unsigned long long)node);
     }
     else if (node->data_type == RETURN)
     {
-        fprintf(log_file, "%d [label =\"return\", style = \"filled\", color = \"red\"];\n", node);
+        fprintf(log_file, "%llu [label =\"return\", style = \"filled\", color = \"red\"];\n", (unsigned long long)node);
     }
     else if (node->data_type == REL_OPERATOR)
     {
-        fprintf(log_file, "%d [label =\"%.*s\", style = \"filled\", color = \"red\"];\n", node, node->data_lng, node->data.str);
+        fprintf(log_file, "%llu [label =\"%.*s\", style = \"filled\", color = \"red\"];\n", (unsigned long long)node, node->data_lng, node->data.str);
     }
     else if (node->data_type == VARIABLE)
     {
-        fprintf(log_file, "%d [label =\"%.*s\", style = \"filled\", color = \"blue\"];\n", node, node->data_lng, node->data.str);
+        fprintf(log_file, "%llu [label =\"%.*s\", style = \"filled\", color = \"blue\"];\n", (unsigned long long)node, node->data_lng, node->data.str);
     }
     else if (node->data_type == DESISION)
     {
-        fprintf(log_file, "%d [label =\"desision\", style = \"filled\", color = \"purple\"];\n", node);
+        fprintf(log_file, "%llu [label =\"desision\", style = \"filled\", color = \"purple\"];\n", (unsigned long long)node);
     }
     else if (node->data_type == STATEMENT)
     {
-        fprintf(log_file, "%d [label =\"statement\", style = \"filled\", color = \"green\"];\n", node);
+        fprintf(log_file, "%llu [label =\"statement\", style = \"filled\", color = \"green\"];\n", (unsigned long long)node);
     }
     else if (node->data_type == DEFINE)
     {
-        fprintf(log_file, "%d [label =\"define\"];\n", node);
+        fprintf(log_file, "%llu [label =\"define\"];\n", (unsigned long long)node);
     }
     else if (node->data_type == CALL)
     {
-        fprintf(log_file, "%d [label =\"call\"];\n", node);
+        fprintf(log_file, "%llu [label =\"call\"];\n", (unsigned long long)node);
     }
     else if (node->data_type == PARAMETER)
     {
-        fprintf(log_file, "%d [label =\"parameter\", style = \"filled\", color = \"grey\"];\n", node);
+        fprintf(log_file, "%llu [label =\"parameter\", style = \"filled\", color = \"grey\"];\n", (unsigned long long)node);
     }
     else if (node->data_type == PARAMETER_CALL)
     {
-        fprintf(log_file, "%d [label =\"parameter call\", style = \"filled\", color = \"grey\"];\n", node);
+        fprintf(log_file, "%llu [label =\"parameter call\", style = \"filled\", color = \"grey\"];\n", (unsigned long long)node);
     }
     else if (node->data_type == FUNCTION)
     {
-        fprintf(log_file, "%d [label =\"function\"];\n", node);
+        fprintf(log_file, "%llu [label =\"function\"];\n", (unsigned long long)node);
     }
     else if (node->data_type == SCAN)
     {
-        fprintf(log_file, "%d [label =\"scan\"];\n", node);
+        fprintf(log_file, "%llu [label =\"scan\"];\n", (unsigned long long)node);
     }
     else if (node->data_type == PRINT)
     {
-        fprintf(log_file, "%d [label =\"print\"];\n", node);
+        fprintf(log_file, "%llu [label =\"print\"];\n", (unsigned long long)node);
     }
     if (node->left)
     {
-        fprintf(log_file, "%d -> %d [label = \"L\"];\n", node, node->left);
+        fprintf(log_file, "%llu -> %llu [label = \"L\"];\n", (unsigned long long)node, (unsigned long long)node->left);
         VisitDumpPrint(node->left);    
     }
 
     if (node->right)
     {
-        fprintf(log_file, "%d -> %d [label = \"R\"];\n", node, node->right);
+        fprintf(log_file, "%llu -> %llu [label = \"R\"];\n", (unsigned long long)node, (unsigned long long)node->right);
         VisitDumpPrint(node->right);
     }
 
@@ -127,6 +127,8 @@ int TreeDump (Node* node)
     fclose(log_file);
 
     system ("dot -Tpng logfile.dot -o graph.png");
+
+    return 0;
 }
 
 int TreeSetNode (Node* node, double data, Node* leftptr, Node* rightptr)
@@ -371,6 +373,8 @@ int kostyl_trig (const char* buffer, Node* main_node, int* buf_pos, int key, int
             TreeReadNodeIN(buffer, tmp_cos_node, buf_pos);
         }
     }
+
+    return 0;
 }
 
 void buffer_clean (char* buffer)
@@ -403,6 +407,8 @@ int FreeTheTree (Tree* tree)
     TreeNodesFree(tree->peak);
 
     free(tree);
+
+    return 0;
 }
 
 int TreeNodesFree (Node* node)
@@ -427,6 +433,8 @@ int TreeNodesFree (Node* node)
 #endif
 
     free(node);
+
+    return 0;
 }
 
 void CreateTreeFile (FILE* inputfile, FILE* outputfile)

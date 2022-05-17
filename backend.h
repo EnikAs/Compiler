@@ -5,9 +5,8 @@
 #include "tree.h"
 
 const int VAR_MAX_CUNT = 100;
-const int MAX_CODE_LEN = 500;
+const int MAX_CODE_LEN = 2048;
 const int MAX_FUNC_CUNT = 100;
-const int MAX_SKIP_CUNT = 500;
 
 enum move_dx_key
 {
@@ -36,8 +35,6 @@ struct JMPtable
 {
     func_jmp_mas func_jmp[MAX_FUNC_CUNT] = {};
     int tmp_func = 0;
-    int skip_jmp[MAX_SKIP_CUNT] = {};
-    int tmp_skip = 0;   
 };
 
 struct var_list
@@ -56,21 +53,21 @@ int     ELFCtor                 (ELFfile* fdata);
 
 int     GenerateELFFile         (Node* node);
 
-int     VisitPrintCommands      (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile* fdata, JMPtable* jtable);
+int     VisitWriteCommands      (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile* fdata, JMPtable* jtable);
 
 int     FindVariable            (var_lists* vr_list, int hash);
 
 int     FindFunction            (JMPtable* jtable, int hash);
+
+int     std_func_add            (ELFfile* fdata, JMPtable* jtable);
 
 int     murmurHash              (char* key, unsigned int len);
 
 #endif
 
 /*
-    dx - for variable in RAM
-    ex - for return ip
-    ax - used for return value
-// zvOnit = retuen
+
+// zvOnit = return
 // krasivEe = while
 // tortbl = if
 // lattE = else 

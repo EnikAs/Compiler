@@ -18,7 +18,6 @@ static int     isbracket   (char value);
 
 static int     iscomma     (char value);
 
-
 #define $VALUE_IS_OPERATOR (value == '-' || value == '+' || value == '*' || value == '/' || value == '^' || value == '=' || value == '<' || value == '>' || value == ';'|| value == '!')
 
 #define $BUF_CUR_ELEM (buf->data[buf->pos])
@@ -55,7 +54,6 @@ tkn_arr* GetAllTokens(FILE* inputfile, buffer* buf)
 
     buf->pos = 0;
     buf->size = scanf_file_size(inputfile);
-    printf("%d ", buf->size);
     buf->data = (char*) calloc(buf->size, sizeof(char));
     CheckPtr(buf->data, "Buffer callocation error!");
 
@@ -827,13 +825,8 @@ int VisitPrintTree (Node* node)
         VisitPrintTree(node->right);
 
     printf(")");
+    return 0;
 }
-
-
-
-
-
-
 
 
 #undef $VALUE_IS_OPERATOR

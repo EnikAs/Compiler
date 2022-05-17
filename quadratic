@@ -35,7 +35,7 @@ lattE
     tortbl (disc >= 0 )
     {
         var = ((0 - 1)* b + sqrt(disc))/ (2 * a);
-        printf(var);
+        print(var);
         var = ((0 - 1)* b - sqrt(disc))/ (2 * a);
         print(var);
     }

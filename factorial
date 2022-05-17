@@ -12,5 +12,5 @@ x = 5;
 scan(x);
 x = factorial(x);
 print(x);
-
+print(12);
 $

@@ -3,6 +3,7 @@
 #include "elfhdr.h"
 
 const int MAGIC4 = 4; // this magic number is used for the desired jump offset.
+const int TRASH = 228;
 
 #define $ND_CHR node->data.ch
 #define $ND_DBL node->data.dbl
@@ -53,11 +54,11 @@ const int MAGIC4 = 4; // this magic number is used for the desired jump offset.
 
 #define $VISIT(node)                              \
 if (node)                                         \
-    VisitPrintCommands(node, vr_lists, com_file, fdata, jtable)  
+    VisitWriteCommands(node, vr_lists, com_file, fdata, jtable)  
 
 #define $VISIT_NEW_LIST(node, NL)                 \
 if (node)                                         \
-    VisitPrintCommands(node, NL, com_file, fdata, jtable)        
+    VisitWriteCommands(node, NL, com_file, fdata, jtable)        
 
 #define $PRINT(...) fprintf(com_file, __VA_ARGS__)
 //#define $PRINT(...) printf(__VA_ARGS__)
@@ -72,6 +73,8 @@ int ELFCtor(ELFfile* fdata)
 
     ELFhdrCtor(&fdata->ehdr);
     PhdrCtor(&fdata->phdr);
+
+    return 0;
 }
 //==========================================================================
 int GenerateELFFile(Node* node)
@@ -91,19 +94,25 @@ int GenerateELFFile(Node* node)
 
     JMPtable* jtable = (JMPtable*) calloc(1, sizeof(JMPtable));
     
-    $WRITE_CONST(0, double);                                               // fill code buffer with trash for memory alignment
+    $WRITE_CONST(0, double);           // fill code buffer with trash for memory alignment
 
     $WRITE_OPCDE(push_rbp);
     $WRITE_OPCDE(mov_rbp_rsp);
     $WRITE_OPCDE(sub_rsp);
     int tmp_ip = fdata->ip;
-    $WRITE_CONST(228, int);
+    $WRITE_CONST(TRASH, int);
 
-    VisitPrintCommands(node, vr_lists, com_file, fdata, jtable);
+    std_func_add(fdata, jtable);
+    
+    VisitWriteCommands(node, vr_lists, com_file, fdata, jtable);
     
     $WRITE_CONST_IP((vr_lists->free-1) * 8, int, tmp_ip);
 
-    int memsz = fdata->ip + 8;// возможно нужно будет добавить -sizeof(int64_t);
+    $WRITE_OPCDE(my_exit);
+
+
+    printf("%d <- ip at the end\n", fdata->ip);
+    int memsz = fdata->ip;
     
     fdata->phdr.p_filesz = memsz;
     fdata->phdr.p_memsz = memsz;
@@ -113,17 +122,22 @@ int GenerateELFFile(Node* node)
     fwrite((char*)(&fdata->code), sizeof(char), fdata->ip + 2, fdata->exe_file);
     
     system("chmod +x roma.lox");
+
+    
     
     free(vr_lists->var);
     free(vr_lists);
+    free(jtable);
     fclose(com_file);
     fclose(fdata->exe_file);
+
+    system("./roma.lox");
     
     return 0;
 }
 //==========================================================================
-int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile* fdata, JMPtable* jtable)
-{
+int VisitWriteCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile* fdata, JMPtable* jtable)
+{//TODO бэк-энд оптимизация!
     switch($ND_TYP)
     {
         case STATEMENT://rework doesnt needed
@@ -133,7 +147,7 @@ int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile
 
             break;
         }
-        case OPERATOR://DONE!!!!!
+        case OPERATOR://DONE!!!!! Слишком большие кейсы полный рефакторинг
         {
             if ($ND_CHR == EQL)
             {
@@ -155,7 +169,7 @@ int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile
                 if ($L->data_type != VARIABLE)
                     assert(0 && "INCORRECT INPUT! YOU CAN ONLY ASSIGN A VALUE TO VARIABLE!\n");
 
-                int tmp_var_hash = murmurHash($L->data.str, node->data_lng);
+                int tmp_var_hash = murmurHash($L->data.str, $L->data_lng);
                 int tmp_var_num  = FindVariable(vr_lists, tmp_var_hash);
 
                 if (tmp_var_num == -1)
@@ -258,21 +272,18 @@ int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile
                 $FREE += 1;
             }
 
-            //$WRITE_OPCDE(push_mem_rbp);
             $WRITE_CONST(tmp_var_num * (-8), int);
             break;
         }
         case CONSTANT://reworked
         {
             int temp = $ND_DBL;
-            //$WRITE_OPCDE(push_constant);
             $WRITE_CONST(temp, int);
 
             break;
         }
         case DEFINE://done
         {
-            //$PRINT("JMP :funcskip%p\n", node);
             $WRITE_OPCDE(jmp);
             int jmp_ip = fdata->ip;
             $WRITE_CONST(fdata->ip, int);
@@ -288,8 +299,6 @@ int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile
             $WRITE_OPCDE(pop_r12);
             $WRITE_OPCDE(mov_rbp_rsp);
 
-            printf("number of args = %d\n",vr_lists_new.free);
-
             int arg_num = 1;
             for (int i = vr_lists_new.free - 2 ; i >= 0 ; i--)
             {
@@ -302,7 +311,7 @@ int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile
             $WRITE_OPCDE(mov_rbp_rsp);
             $WRITE_OPCDE(sub_rsp);
             int ip_sub_rsp = fdata->ip;                         // save current ip to rewrite it lately
-            $WRITE_CONST(228, int);
+            $WRITE_CONST(TRASH, int);
 
             $VISIT_NEW_LIST($R, &vr_lists_new);
 
@@ -359,64 +368,60 @@ int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile
             }
             break;
         }
-        case CALL://done, but without standart functions
+        case CALL://done
         {
             if (strncmp(node->left->data.str, "scan", 4) == 0)
             { 
-                $PRINT("IN\n");
-                $PRINT("POP ");
-                
-                int tmp_hash    = murmurHash(node->right->right->data.str, node->right->right->data_lng);
-                int tmp_var_num = FindVariable(vr_lists, tmp_hash);
-                if (tmp_var_num == -1 )
-                    assert(0 && "VARIABLE IN SCAN NOT FOUND YOU ARE GONNA WORK WITH RUBBISH !!!!!!!");
+                int hash = murmurHash($L->data.str, $L->data_lng);
+                int func_ip = FindFunction(jtable, hash);
+                if (func_ip == -1)
+                    assert(0 && "YOU CAN'T USE FUNCTIONS BEFORE THEY'RE DEFINED!!!");
 
-                $PRINT("[%d+dx]\n", vr_lists->var[tmp_var_num].var_dx_shift);
+                $WRITE_OPCDE(call);
+                $WRITE_CONST(func_ip - fdata->ip - MAGIC4, int);
+
+                if ($R->right->data_type != VARIABLE)
+                    assert(0 && "INCORRECT INPUT, SCAN MUST HAVE VARIABLE AS A PARAMETER!");
+
+                $WRITE_OPCDE(mov_mem_rbp_rax);
+                $VISIT($R->right);
             }
             
             else if (strncmp(node->left->data.str, "print", 5) == 0)
             {
-                if (node->right->right->data_type == VARIABLE)
-                {
-                    int tmp_hash    = murmurHash(node->right->right->data.str, node->right->right->data_lng);
-                    int tmp_var_num = FindVariable(vr_lists, tmp_hash);
-                    
-                    if (tmp_var_num == -1 )
-                    {
-                        assert(0 && "VARIABLE IN PRINT NOT FOUND! YOU ARE GONNA WORK WITH RUBBISH !!!!!!!");
+                int hash = murmurHash($L->data.str, $L->data_lng);
+                int func_ip = FindFunction(jtable, hash);
+                if (func_ip == -1)
+                    assert(0 && "YOU CAN'T USE FUNCTIONS BEFORE THEY'RE DEFINED!!!");
+
+                if ($R->right->data_type == CONSTANT)          
+                    {                                   
+                        $WRITE_OPCDE(mov_rax_const);    
+                        $VISIT($R->right);                     
                     }
 
-                    $PRINT("PUSH [%d+dx]\n", vr_lists->var[tmp_var_num].var_dx_shift);
-                    $PRINT("PRCH\n");
-                }
-                else if (node->right->right->data_type == CONSTANT)
-                {
-                    $PRINT("PUSH %lf\n", node->right->right->data.dbl);
-                    $PRINT("PRCH\n");
-                }
-                else 
-                    assert(0 && "INCORRECT PRINT ARG");
+                else if($R->right->data_type == VARIABLE)      
+                    {                                   
+                        $WRITE_OPCDE(mov_rax_mem_rbp);  
+                        $VISIT($R->right);                     
+                    }
+
+                $WRITE_OPCDE(call);
+                $WRITE_CONST(func_ip - fdata->ip - MAGIC4, int);
             }
 
             else if (strncmp(node->left->data.str, "sqrt", 4) == 0)
             {
-                if (node->right->right->data_type == VARIABLE)
-                {
-                    int tmp_hash    = murmurHash(node->right->right->data.str, node->right->right->data_lng);
-                    int tmp_var_num = FindVariable(vr_lists, tmp_hash);
-                    if (tmp_var_num == -1 )
-                        assert(0 && "VARIABLE IN SQRT NOT FOUND YOU ARE GONNA WORK WITH RUBBISH !!!!!!!");
+                int hash = murmurHash($L->data.str, $L->data_lng);
+                int func_ip = FindFunction(jtable, hash);
+                if (func_ip == -1)
+                    assert(0 && "YOU CAN'T USE FUNCTIONS BEFORE THEY'RE DEFINED!!!");
 
-                    $PRINT("PUSH [%d+dx]\n", vr_lists->var[tmp_var_num].var_dx_shift);
-                    $PRINT("SQRT\n");
-                }
-                else if (node->right->right->data_type == CONSTANT)
-                {
-                    $PRINT("PUSH %lf\n", node->right->right->data.dbl);
-                    $PRINT("SQRT\n");
-                }
-                else 
-                    assert(0 && "INCORRECT SQRT ARG");
+                $WRITE_OPCDE(mov_rax_mem_rbp);
+                $VISIT($R->right);
+
+                $WRITE_OPCDE(call);
+                $WRITE_CONST(func_ip - fdata->ip - MAGIC4, int);
             }
             
             else
@@ -429,7 +434,7 @@ int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile
                     assert(0 && "YOU CAN'T USE FUNCTIONS BEFORE THEY'RE DEFINED!!!");
 
                 $WRITE_OPCDE(call);
-                $WRITE_CONST(func_ip - fdata->ip - MAGIC4, int);
+                $WRITE_CONST(func_ip - fdata->ip - MAGIC4, int);//
             }
 
             break;
@@ -437,13 +442,19 @@ int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile
         case RETURN://done
         {
             if ($L->data_type == CONSTANT)
+            {
                 $WRITE_OPCDE(push_constant);
+                $VISIT($L);
+                $WRITE_OPCDE(pop_rax);
+            }
             else if ($L->data_type == VARIABLE)
+            {
                 $WRITE_OPCDE(push_mem_rbp);
-            
-            $VISIT($L);
-            
-            $WRITE_OPCDE(pop_rax);
+                $VISIT($L);
+                $WRITE_OPCDE(pop_rax);
+            }
+            else
+                $VISIT($L);
 
             $WRITE_OPCDE(mov_rsp_rbp);
             $WRITE_OPCDE(pop_rbp);
@@ -460,10 +471,17 @@ int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile
         case DESISION://done
         {
             int rel_jmp_ip = fdata->ip;
-            $WRITE_CONST(0, int); //trash
+            $WRITE_CONST(TRASH, int);
             $VISIT($L);
+            $WRITE_OPCDE(jmp);            //jmp на скип else после тру ифа
+            int else_skip_jmp = fdata->ip;
+            $WRITE_CONST(TRASH, int);
             $WRITE_CONST_IP(fdata->ip - rel_jmp_ip - MAGIC4, int, rel_jmp_ip);
-            
+
+            $VISIT($R);
+
+            $WRITE_CONST_IP(fdata->ip - else_skip_jmp - MAGIC4, int, else_skip_jmp);
+
             break;
         }
         case REL_OPERATOR:// nothing to do
@@ -482,7 +500,7 @@ int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile
 
             $WRITE_OPCDE(cmp_rax_rbx);
 
-            //  Here I use jumps with the opposite condition !!!
+            //  Here I use jumps with the opposite condition !!! Стрцмп кринж
 
             if (strncmp($ND_STR, "==", 2) == 0)
             {
@@ -520,7 +538,7 @@ int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile
 
             $VISIT($L);
             int while_end_ip = fdata->ip;
-            $WRITE_CONST(228, int);// trash jmp at the end
+            $WRITE_CONST(TRASH, int);// trash jmp at the end
 
             $VISIT($R); // while body
             
@@ -534,9 +552,9 @@ int VisitPrintCommands (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile
         }
         defaul:
         {
-            assert(0 && "Shit happen(s) (undefined case in VisitPrintCommands switch)");
+            assert(0 && "Shit happen(s) (undefined case in VisitWriteCommands switch)");
         }
-    }
+    }// Эссэ "Ночной кодинг))"
     return 0;
 }
 //==========================================================================
@@ -556,9 +574,41 @@ int FindFunction(JMPtable* jtable, int hash)
     for(int i = 0 ; i < jtable->tmp_func ; i++)
     {
         if (jtable->func_jmp[i].func_hash == hash)
-            return jtable->func_jmp->func_ip;
+            return jtable->func_jmp[i].func_ip;
     }
     return -1;
+}
+//==========================================================================
+#define $add_one_std_func(fname)                                            \
+do                                                                          \
+{                                                                           \
+    $WRITE_OPCDE(jmp);                                                      \
+    jmp_ip = fdata->ip;                                                     \
+    $WRITE_CONST(fdata->ip, int);                                           \
+                                                                            \
+    $CUR_FUNC.func_hash = murmurHash(fname, strlen(fname));                 \
+    $CUR_FUNC.func_ip = fdata->ip;                                          \
+    jtable->tmp_func += 1;                                                  \
+                                                                            \
+    $WRITE_OPCDE(my_##fname);                                               \
+    $WRITE_CONST_IP(fdata->ip - jmp_ip - MAGIC4, int, jmp_ip);              \
+} while (0);
+
+//==========================================================================
+int std_func_add(ELFfile* fdata, JMPtable* jtable)
+{
+    char scan[]  = "scan";
+    char print[] = "print";
+    char sqrt[]  = "sqrt";
+    int jmp_ip   = 0;
+
+    $add_one_std_func(scan);
+
+    $add_one_std_func(print);
+
+    $add_one_std_func(sqrt);
+
+    return 0;
 }
 //==========================================================================
 int murmurHash (char * key, unsigned int len)
