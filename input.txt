@@ -1,13 +1,9 @@
-factorial(x)
-{
-    tortbl (x <= 1)
-    {
-        zvOnit 1; 
-    }
-        zvOnit x * factorial(x - 1);
-    
-}
-x = 20000;
+x = 4;
+
+scan(x);
+
 x = sqrt(x);
+
 print(x);
+
 $

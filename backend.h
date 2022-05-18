@@ -8,10 +8,20 @@ const int VAR_MAX_CUNT = 100;
 const int MAX_CODE_LEN = 2048;
 const int MAX_FUNC_CUNT = 100;
 
-enum move_dx_key
+enum var_def
 {
-    MINUS = 1488,
-    PLUS
+    UNDEFINED = 0,
+    DEFINED = 1
+};
+
+enum std_funcs
+{
+    SCAN_HASH = 2031059512,
+    PRINT_HASH = -1817107093,
+    SQRT_HASH = 786779368,
+
+    STD_FUNC_DETECTED,
+    STD_FUNC_NOT_DETECTED
 };
 
 struct ELFfile
@@ -40,7 +50,8 @@ struct JMPtable
 struct var_list
 {
     int var_hash = 0;
-    int var_dx_shift = 0;
+    int var_value = 0;
+    int def_flag = UNDEFINED;
 };
 
 struct var_lists
@@ -53,13 +64,13 @@ int     ELFCtor                 (ELFfile* fdata);
 
 int     GenerateELFFile         (Node* node);
 
-int     VisitWriteCommands      (Node* node, var_lists* vr_lists, FILE* com_file, ELFfile* fdata, JMPtable* jtable);
+int     VisitWriteCommands      (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable);
 
 int     FindVariable            (var_lists* vr_list, int hash);
 
 int     FindFunction            (JMPtable* jtable, int hash);
 
-int     std_func_add            (ELFfile* fdata, JMPtable* jtable);
+void    FixPhdr                 (ELFfile* fdata);
 
 int     murmurHash              (char* key, unsigned int len);
 
