@@ -12,6 +12,10 @@ const int CONITINUE = 1;
 #define $ND_LNG node->data_lng
 #define $ND_TYP node->data_type
 
+#define $CUR_VAR_FLAG vr_lists->var[cur_var_num].def_flag
+#define $CUR_VAR_HASH vr_lists->var[cur_var_num].var_hash
+#define $CUR_VAR_VAL vr_lists->var[cur_var_num].var_value
+
 #define $CUR_FUNC jtable->func_jmp[jtable->tmp_func]
 
 #define $FREE_VAR vr_lists->var[vr_lists->free]
@@ -28,8 +32,17 @@ if (node)                                         \
 if (node)                                         \
     VisitWriteCommands(node, newlist, fdata, jtable)
 
+#define $VISIT_CALC(node)                         \
+            (VisitCalcVal(node, vr_lists))
+
+//==========================================================================
+static int    VisitCheckDefinedVal(Node* node, var_lists* vr_lists, int* def_value);
+
+static double VisitCalcVal(Node* node, var_lists* vr_lists);
 //==========================================================================
 static int  std_funcs_add         (ELFfile* fdata, JMPtable* jtable);
+
+static int  WriteCode             (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable);    
 
 static int  RelOpHash             (Node* node);
 //==========================================================================
@@ -73,7 +86,7 @@ int ELFCtor              (ELFfile* fdata)
 {
     assert(fdata);
 
-    fdata->exe_file = fopen("roma.lox", "w");
+    fdata->exe_file = fopen("run.me", "w");
 
     if (fdata->exe_file == NULL)
         assert(0 && "EXECUTABLE FILE PTR IS NULL !!");
@@ -89,18 +102,39 @@ int GenerateELFFile      (Node* node)
     assert(node);
 
     var_lists* vr_lists = (var_lists*) calloc(1, sizeof(var_lists));
-    vr_lists->free = 1;
+    CheckPtr(vr_lists, "vr_lists callocation error!");
+    $FREE = 1;
 
     vr_lists->var = (var_list*) calloc(VAR_MAX_CUNT, sizeof(var_list));
+    CheckPtr(vr_lists->var, "vr_lists->var callocation error!");
 
     FILE* com_file = fopen("asm_file.txt", "w");
 
     ELFfile* fdata = (ELFfile*) calloc(1, sizeof(ELFfile));
+    CheckPtr(fdata, "fdata callocation error!");
 
     ELFCtor(fdata);
 
     JMPtable* jtable = (JMPtable*) calloc(1, sizeof(JMPtable));
+    CheckPtr(jtable, "jtable callocation error!");
     
+    WriteCode(node, vr_lists, fdata, jtable);
+    
+    system("chmod +x run.me");
+
+    free(vr_lists->var);
+    free(vr_lists);
+    free(jtable);
+    fclose(com_file);
+    fclose(fdata->exe_file);
+
+    //system("./run.me");
+    
+    return 0;
+}
+//==========================================================================
+int WriteCode(Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable)
+{
     $WRITE_CONST(0, double);           // fill code buffer with trash for memory alignment
     
     std_funcs_add(fdata, jtable);
@@ -108,12 +142,12 @@ int GenerateELFFile      (Node* node)
     $WRITE_OPCDE(push_rbp);
     $WRITE_OPCDE(mov_rbp_rsp);
     $WRITE_OPCDE(sub_rsp);
-    int tmp_ip = fdata->ip;
-    $WRITE_CONST(TRASH, int);          // subtract from rsp the number of local variables to be able to use stack
+    int sub_rsp_ip = fdata->ip;
+    $WRITE_CONST(TRASH, int);          // substract from rsp the number of local variables to be able to use stack
 
     VisitWriteCommands(node, vr_lists, fdata, jtable);
     
-    $WRITE_CONST_IP((vr_lists->free - 1) * 8, int, tmp_ip);   // vr_lists->free - 1 = number of local variables
+    $WRITE_CONST_IP(($FREE - 1) * SIZE_OF_REG, int, sub_rsp_ip);   // $FREE - 1 = number of local variables
 
     $WRITE_OPCDE(my_exit);
 
@@ -124,18 +158,6 @@ int GenerateELFFile      (Node* node)
     fwrite((char*)(&fdata->ehdr), sizeof(char), sizeof(Elf64_Ehdr), fdata->exe_file);
     fwrite((char*)(&fdata->phdr), sizeof(char), sizeof(Elf64_Phdr), fdata->exe_file);
     fwrite((char*)(&fdata->code), sizeof(char), fdata->ip, fdata->exe_file);
-    
-    system("chmod +x roma.lox");
-
-    free(vr_lists->var);
-    free(vr_lists);
-    free(jtable);
-    fclose(com_file);
-    fclose(fdata->exe_file);
-
-    //system("./roma.lox");
-    
-    return 0;
 }
 //==========================================================================
 int VisitWriteCommands   (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable)
@@ -216,48 +238,46 @@ int VWC_stmt_case        (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
 //==========================================================================
 int VWC_op_case_equ      (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable)
 {
-    if ($ND_CHR == EQL)
+    if ($L->data_type != VARIABLE)
+        assert(0 && "INCORRECT INPUT! YOU CAN ONLY ASSIGN A VALUE TO VARIABLE!\n");
+
+    int cur_var_hash = murmurHash($L->data.str, $L->data_lng);
+    int cur_var_num  = FindVariable(vr_lists, cur_var_hash);
+
+    int def_val = DEFINED;
+    VisitCheckDefinedVal($R, vr_lists, &def_val);
+
+    if (def_val == DEFINED)
     {
-        if ($R->data_type == CONSTANT)          
-            {                                   
-                $WRITE_OPCDE(mov_rax_const);    
-                $VISIT($R);                     
-            }
+        $CUR_VAR_FLAG = DEFINED;
+        double var_val = $VISIT_CALC($R);
+        $CUR_VAR_VAL = var_val;
 
-        else if($R->data_type == VARIABLE)      
-            {                                   
-                $WRITE_OPCDE(mov_rax_mem_rbp);  
-                $VISIT($R);                     
-            }
+        $WRITE_OPCDE(mov_rax_const);
+        $WRITE_CONST((int)var_val * 100, int);
+    }
         
-        else
-            $VISIT($R);
+    if (def_val == UNDEFINED)
+    {
+        $CUR_VAR_FLAG = UNDEFINED;
 
-        if ($L->data_type != VARIABLE)
-            assert(0 && "INCORRECT INPUT! YOU CAN ONLY ASSIGN A VALUE TO VARIABLE!\n");
-
-        int tmp_var_hash = murmurHash($L->data.str, $L->data_lng);
-        int tmp_var_num  = FindVariable(vr_lists, tmp_var_hash);
-        
-        $WRITE_OPCDE(mov_mem_rbp_rax);
-        $WRITE_CONST(tmp_var_num * (-8), int);
-
-        return BREAK;
+        visit_check_var_const_use_rax($R, vr_lists, fdata, jtable);
     }
 
-    visit_check_var_const_use_rax($L, vr_lists, fdata, jtable);
+    $WRITE_OPCDE(mov_mem_rbp_rax);
+    $WRITE_CONST(cur_var_num * (-SIZE_OF_REG), int);
     
-    visit_check_var_const_use_rbx($R, vr_lists, fdata, jtable);
-
-    return CONITINUE;
+    return BREAK;
 }
 //==========================================================================
 int VWC_op_case          (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable)
 {
-    int break_check = VWC_op_case_equ(node, vr_lists, fdata, jtable);
+    if ($ND_CHR == EQL)
+       return VWC_op_case_equ(node, vr_lists, fdata, jtable);
 
-    if (break_check == BREAK)
-        return BREAK;
+    visit_check_var_const_use_rax($L, vr_lists, fdata, jtable);
+    
+    visit_check_var_const_use_rbx($R, vr_lists, fdata, jtable);
 
     switch ($ND_CHR)
     {
@@ -301,10 +321,10 @@ int VWC_op_case          (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
 //==========================================================================
 int VWC_var_case         (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable)
 {
-    int tmp_var_hash = murmurHash($ND_STR, node->data_lng);
-    int tmp_var_num  = FindVariable(vr_lists, tmp_var_hash);
+    int cur_var_hash = murmurHash($ND_STR, node->data_lng);
+    int cur_var_num  = FindVariable(vr_lists, cur_var_hash);
 
-    $WRITE_CONST(tmp_var_num * (-8), int);
+    $WRITE_CONST(cur_var_num * (-SIZE_OF_REG), int);
 
     return BREAK;
 }
@@ -326,6 +346,7 @@ int VWC_def_case         (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
 
     var_lists vr_lists_new = {};
     vr_lists_new.var = (var_list*) calloc(VAR_MAX_CUNT, sizeof(var_list));
+    CheckPtr(vr_lists_new.var, "vr_lists_new.var callocation error!");
     vr_lists_new.free = 1;
 
     $VISIT_NEW_LIST($L, &vr_lists_new);
@@ -334,11 +355,11 @@ int VWC_def_case         (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
     $WRITE_OPCDE(pop_r12);
     $WRITE_OPCDE(mov_rbp_rsp);
 
-    int arg_num = 0;
+    int arg_num = 1;
     for (int i = vr_lists_new.free - 2 ; i >= 0 ; i--)
     {
         $WRITE_OPCDE(pop_mem_rbp);
-        $WRITE_CONST(arg_num * (-8), int);
+        $WRITE_CONST((1 + arg_num)  * (-SIZE_OF_REG), int); // this "+1" needed for correct stack rework
         arg_num += 1;
     }
 
@@ -351,7 +372,7 @@ int VWC_def_case         (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
 
     $VISIT_NEW_LIST($R, &vr_lists_new);
 
-    $WRITE_CONST_IP((vr_lists_new.free -1) * (8), int, ip_sub_rsp);
+    $WRITE_CONST_IP((vr_lists_new.free -1) * (SIZE_OF_REG), int, ip_sub_rsp);
     $WRITE_OPCDE(mov_rsp_rbp);
     $WRITE_OPCDE(pop_rbp);
     $WRITE_OPCDE(ret);
@@ -425,7 +446,7 @@ int VWC_call_case        (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
         assert(0 && "YOU CAN'T USE FUNCTIONS BEFORE THEY'RE DEFINED!!!");
 
     $WRITE_OPCDE(call);
-    $WRITE_CONST(func_ip - fdata->ip - sizeof(int), int);//
+    $WRITE_CONST(func_ip - fdata->ip - sizeof(int), int);
 
     return BREAK;
 }
@@ -603,21 +624,21 @@ int VWC_while_case       (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
 //==========================================================================
 void visit_check_var_const_use_rbx (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable)
 {
-    if (node->data_type == CONSTANT)// was $R
+    if (node->data_type == CONSTANT)
     {
         $WRITE_OPCDE(mov_rbx_const);
-        $VISIT(node);// was $R
+        $VISIT(node);
     }
 
-    else if(node->data_type == VARIABLE)// was $R
+    else if(node->data_type == VARIABLE)
     {
         $WRITE_OPCDE(mov_rbx_mem_rbp);
-        $VISIT(node);// was $R
+        $VISIT(node);
     }
     else
     {
         $WRITE_OPCDE(push_rax);
-        $VISIT(node);// was $R
+        $VISIT(node);
         $WRITE_OPCDE(mov_rbx_rax);
         $WRITE_OPCDE(pop_rax);
     }
@@ -625,19 +646,19 @@ void visit_check_var_const_use_rbx (Node* node, var_lists* vr_lists, ELFfile* fd
 //==========================================================================
 void visit_check_var_const_use_rax (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable)
 {
-    if (node->data_type == CONSTANT)// was $L
+    if (node->data_type == CONSTANT)
     {
         $WRITE_OPCDE(mov_rax_const);
-        $VISIT(node);// was $L
+        $VISIT(node);
     }
-    else if(node->data_type == VARIABLE)// was $L
+    else if(node->data_type == VARIABLE)
     {
         $WRITE_OPCDE(mov_rax_mem_rbp);
-        $VISIT(node);// was $L
+        $VISIT(node);
     }
     else
     {
-        $VISIT(node);// was $L
+        $VISIT(node);
     }
 }
 //==========================================================================
@@ -682,7 +703,7 @@ do                                                                          \
     $WRITE_OPCDE(my_##fname);                                               \
     $WRITE_CONST_IP(fdata->ip - jmp_ip - sizeof(int), int, jmp_ip);         \
 } while (0);
-
+//==========================================================================
 int std_funcs_add(ELFfile* fdata, JMPtable* jtable)
 {
     char scan[]  = "scan";
@@ -706,6 +727,95 @@ void FixPhdr(ELFfile* fdata)
     
     fdata->phdr.p_filesz = memsz;
     fdata->phdr.p_memsz = memsz;
+}
+//==========================================================================
+// backend optimisation funcs
+//==========================================================================
+#define $VISIT_CHECK_DEF(node)                      \
+        if (node)                                   \
+            VisitCheckDefinedVal(node, vr_lists, def_value)
+//==========================================================================
+int VisitCheckDefinedVal(Node* node, var_lists* vr_lists, int* def_value)
+{
+    switch($ND_TYP)
+    {
+        case OPERATOR:
+        {
+            $VISIT_CHECK_DEF($L);
+            $VISIT_CHECK_DEF($R);
+            break;
+        }
+        case VARIABLE:
+        {
+            int cur_var_hash = murmurHash($ND_STR, node->data_lng);
+            int cur_var_num  = FindVariable(vr_lists, cur_var_hash);
+            
+            if ($CUR_VAR_FLAG == UNDEFINED)
+                *def_value = UNDEFINED;
+            
+            break;
+        }
+        case CALL:
+        {
+            *def_value = UNDEFINED;
+
+            break;
+        }
+        case CONSTANT:
+        {
+            break;
+        }
+        default:
+        {
+            assert(ERRORR && "Something went wrond! Default case in VisitCheckDefinedVal!");
+        } 
+    }
+}
+#undef $VISIT_CHECK_DEF
+//==========================================================================
+double VisitCalcVal(Node* node, var_lists* vr_lists)
+{
+    switch($ND_TYP)
+    {
+        case OPERATOR:
+        {
+            switch($ND_CHR)
+            {
+                case MUL:
+                {
+                    return $VISIT_CALC($L) * $VISIT_CALC($R);
+                }
+                case DIV:
+                {
+                    return $VISIT_CALC($L) / $VISIT_CALC($R);
+                }
+                case ADD:
+                {
+                    return $VISIT_CALC($L) + $VISIT_CALC($R);
+                }
+                case SUB:
+                {
+                    return $VISIT_CALC($L) - $VISIT_CALC($R);
+                }
+            }
+        }
+        case VARIABLE:
+        {
+            int cur_var_hash = murmurHash($ND_STR, node->data_lng);
+            int cur_var_num  = FindVariable(vr_lists, cur_var_hash);
+
+            return $CUR_VAR_VAL;
+        }
+        case CONSTANT:
+        {
+            return $ND_DBL;
+        }
+        default:
+        {
+            assert(ERRORR && "Something went wrond! Default case in VisitCalcVal!");
+        }
+        
+    }
 }
 //==========================================================================
 int RelOpHash(Node* node)
@@ -774,12 +884,14 @@ int murmurHash (char * key, unsigned int len)
 #undef $ND_LNG
 #undef $ND_TYP
 
+#undef $CUR_VAR_FLAG
+#undef $CUR_VAR_HASH
+#undef $CUR_VAR_VAL
+
+#undef $CUR_FUNC
+
 #undef $FREE_VAR
 #undef $FREE
 
 #undef $R
 #undef $L
-
-#undef $VISIT
-#undef $VISIT_NEW_LIST
-#undef $PRINT

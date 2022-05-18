@@ -72,6 +72,4 @@ void        SyntaxERROR     (const char* s);
 
 Node*       CreateNode      (int node_type);
 
-void        CheckPtr        (void* ptr, const char* error);
-
 #endif

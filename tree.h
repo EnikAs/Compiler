@@ -127,4 +127,7 @@ int     kostyl_trig              (const char* buffer, Node* main_node, int* buf_
 
 size_t  scanf_file_size          (FILE* input_file);
 
+void    CheckPtr                 (void* ptr, const char* error);
+
+
 #endif

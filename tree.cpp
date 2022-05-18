@@ -455,3 +455,12 @@ void CreateTreeFile (FILE* inputfile, FILE* outputfile)
         tmp_ch = fgetc(inputfile);
     }
 }
+
+void CheckPtr(void* ptr, const char* error)
+{
+    if (ptr == NULL)
+    {
+        printf("%s", error);
+        assert(0);
+    }
+}

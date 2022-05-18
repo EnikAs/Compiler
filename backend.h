@@ -7,11 +7,12 @@
 const int VAR_MAX_CUNT = 100;
 const int MAX_CODE_LEN = 2048;
 const int MAX_FUNC_CUNT = 100;
+const int SIZE_OF_REG = 8;
 
 enum var_def
 {
-    UNDEFINED = 0,
-    DEFINED = 1
+    UNDEFINED = 1,
+    DEFINED = 0
 };
 
 enum std_funcs

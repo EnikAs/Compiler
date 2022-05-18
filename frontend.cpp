@@ -38,15 +38,6 @@ static int     iscomma     (char value);
 #define $Require(ch) Require(ch, tk_array)
 
 //==========================================================================
-void CheckPtr(void* ptr, const char* error)
-{
-    if (ptr == NULL)
-    {
-        printf("%s", error);
-        assert(0);
-    }
-}
-//==========================================================================
 tkn_arr* GetAllTokens(FILE* inputfile, buffer* buf)
 {
     assert(inputfile);
