@@ -338,7 +338,7 @@ Node* GetG (tkn_arr* tk_array)
         
     if ($CUR_TKN_DATA_CHR == '$')
     {
-        printf("IT IS THE END!!!");
+        
     }
     else
     {
@@ -349,10 +349,6 @@ Node* GetG (tkn_arr* tk_array)
     {
         assert(ERRORR && "Something goes wrong, tree->peak = NULL");
     }   
-    else 
-    {
-        printf("Correct end of GetG !\n");
-    }
 
     return var; 
 }

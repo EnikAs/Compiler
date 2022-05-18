@@ -1,8 +1,58 @@
-x = 10 + 23 - 213 + 34 * 123 + 100/100;
+a = 0;
+b = 0;
+c = 0;
 
-y = x + 3;
+var = 0;
+scan(a);
+scan(b);
+scan(c);
+
+tortbl (a == 0)
+{
+    tortbl (c == 0)
+    {
+        var = 0;
+        print(var);
+    }
+    lattE
+    {
+        tortbl (b != 0)
+        {
+            var = (0 - 1) * c / b;
+            print(var);
+        }
+        lattE
+        {
+            var = 228;
+            print(var);
+        }
+    }
+}
+lattE
+{
+    disc = b * b - 4 * a * c;
+
+    tortbl (disc > 0 )
+    {
+        var = ((0 - 1)* b + sqrt(disc))/ (2 * a);
+        print(var);
+        var = ((0 - 1)* b - sqrt(disc))/ (2 * a);
+        print(var);
+    }
+    lattE
+    {
+        tortbl (disc == 0)
+        {
+            var = ((0 - 1)* b + sqrt(disc))/ (2 * a);
+            print(var);
+        }
+        lattE
+        {
+            print(1488);
+        }    
+    }
+}
 
 
-print(x);
 
 $

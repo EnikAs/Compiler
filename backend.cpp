@@ -151,8 +151,6 @@ int WriteCode(Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable)
 
     $WRITE_OPCDE(my_exit);
 
-    printf("%d <- ip at the end\n", fdata->ip);
-
     FixPhdr(fdata);
     
     fwrite((char*)(&fdata->ehdr), sizeof(char), sizeof(Elf64_Ehdr), fdata->exe_file);
@@ -293,7 +291,7 @@ int VWC_op_case          (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
             break;
         }
         case ADD:
-        {   PRINT_LINE
+        {  
             $WRITE_OPCDE(add_rax_rbx);
             break;
         }
@@ -468,6 +466,10 @@ int VWC_call_case_std_func (Node* node, var_lists* vr_lists, ELFfile* fdata, JMP
 
         $WRITE_OPCDE(mov_mem_rbp_rax);
         $VISIT($R->right);
+        
+        int cur_var_hash = murmurHash($R->right->data.str, $R->right->data_lng);
+        int cur_var_num  = FindVariable(vr_lists, cur_var_hash);
+        $CUR_VAR_FLAG = UNDEFINED;
 
         return STD_FUNC_DETECTED;
     }

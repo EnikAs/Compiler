@@ -1,5 +1,5 @@
 a = 1;
-b = 1;
+b = 2;
 c = 1;
 
 var = 0;
@@ -32,7 +32,9 @@ lattE
 {
     disc = b * b - 4 * a * c;
 
-    tortbl (disc >= 0 )
+    print(disc);
+
+    tortbl (disc > 0 )
     {
         var = ((0 - 1)* b + sqrt(disc))/ (2 * a);
         print(var);
@@ -41,7 +43,15 @@ lattE
     }
     lattE
     {
-        print(1488);
+        tortbl (disc == 0)
+        {
+            var = ((0 - 1)* b + sqrt(disc))/ (2 * a);
+            print(var);
+        }
+        lattE
+        {
+            print(1488);
+        }    
     }
 }
 
