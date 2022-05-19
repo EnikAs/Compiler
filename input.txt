@@ -1,58 +1,7 @@
-a = 0;
-b = 0;
-c = 0;
+x = 10;
 
-var = 0;
-scan(a);
-scan(b);
-scan(c);
-
-tortbl (a == 0)
+pinzhak (x > 0)
 {
-    tortbl (c == 0)
-    {
-        var = 0;
-        print(var);
-    }
-    lattE
-    {
-        tortbl (b != 0)
-        {
-            var = (0 - 1) * c / b;
-            print(var);
-        }
-        lattE
-        {
-            var = 228;
-            print(var);
-        }
-    }
+    x = x - 1;
 }
-lattE
-{
-    disc = b * b - 4 * a * c;
-
-    tortbl (disc > 0 )
-    {
-        var = ((0 - 1)* b + sqrt(disc))/ (2 * a);
-        print(var);
-        var = ((0 - 1)* b - sqrt(disc))/ (2 * a);
-        print(var);
-    }
-    lattE
-    {
-        tortbl (disc == 0)
-        {
-            var = ((0 - 1)* b + sqrt(disc))/ (2 * a);
-            print(var);
-        }
-        lattE
-        {
-            print(1488);
-        }    
-    }
-}
-
-
-
 $

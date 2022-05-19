@@ -11,8 +11,14 @@ const int SIZE_OF_REG = 8;
 
 enum var_def
 {
-    UNDEFINED = 1,
-    DEFINED = 0
+    UNDEFINED = 0,
+    DEFINED = 1
+};
+
+enum while_flag
+{
+    NOT_IN_WHILE = 0,
+    IN_WHILE = 1,
 };
 
 enum std_funcs
@@ -59,6 +65,7 @@ struct var_lists
 {
     var_list* var = NULL;
     int free = 1;
+    int while_flag = NOT_IN_WHILE;
 };
 
 int     ELFCtor                 (ELFfile* fdata);

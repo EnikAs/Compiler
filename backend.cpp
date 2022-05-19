@@ -245,8 +245,9 @@ int VWC_op_case_equ      (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
     int def_val = DEFINED;
     VisitCheckDefinedVal($R, vr_lists, &def_val);
 
-    if (def_val == DEFINED)
+    if (def_val == DEFINED && vr_lists->while_flag == NOT_IN_WHILE)
     {
+        PRINT_LINE
         $CUR_VAR_FLAG = DEFINED;
         double var_val = $VISIT_CALC($R);
         $CUR_VAR_VAL = var_val;
@@ -255,8 +256,9 @@ int VWC_op_case_equ      (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
         $WRITE_CONST((int)var_val * 100, int);
     }
         
-    if (def_val == UNDEFINED)
+    else
     {
+        PRINT_LINE
         $CUR_VAR_FLAG = UNDEFINED;
 
         visit_check_var_const_use_rax($R, vr_lists, fdata, jtable);
@@ -607,6 +609,8 @@ int VWC_rel_op_case      (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
 //==========================================================================
 int VWC_while_case       (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable)
 {
+    vr_lists->while_flag = IN_WHILE;
+
     int while_strt_ip = fdata->ip;
 
     $VISIT($L);
@@ -620,6 +624,8 @@ int VWC_while_case       (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
     $WRITE_CONST(while_strt_ip - fdata->ip - sizeof(int), int);
 
     $WRITE_CONST_IP(fdata->ip - while_end_ip - sizeof(int), int, while_end_ip);
+
+    vr_lists->while_flag = NOT_IN_WHILE;
 
     return BREAK;
 }
