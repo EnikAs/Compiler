@@ -12,7 +12,8 @@ const int CONITINUE = 1;
 #define $ND_LNG node->data_lng
 #define $ND_TYP node->data_type
 
-#define $CUR_VAR_FLAG vr_lists->var[cur_var_num].def_flag
+#define $CUR_VAR_DEF_FLAG vr_lists->var[cur_var_num].def_flag
+#define $CUR_VAR_PARAM_FLAG vr_lists->var[cur_var_num].param_flag
 #define $CUR_VAR_HASH vr_lists->var[cur_var_num].var_hash
 #define $CUR_VAR_VAL vr_lists->var[cur_var_num].var_value
 
@@ -41,6 +42,8 @@ static int    VisitCheckDefinedVal(Node* node, var_lists* vr_lists, int* def_val
 static double VisitCalcVal(Node* node, var_lists* vr_lists);
 //==========================================================================
 static int  std_funcs_add         (ELFfile* fdata, JMPtable* jtable);
+
+static int  pop_param_back        (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable);
 
 static int  WriteCode             (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable);    
 
@@ -159,7 +162,7 @@ int WriteCode(Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable)
 }
 //==========================================================================
 int VisitWriteCommands   (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable)
-{//TODO бэк-энд оптимизация!
+{
     switch($ND_TYP)
     {
         case STATEMENT://rework doesnt needed
@@ -247,19 +250,17 @@ int VWC_op_case_equ      (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
 
     if (def_val == DEFINED && vr_lists->while_flag == NOT_IN_WHILE)
     {
-        PRINT_LINE
-        $CUR_VAR_FLAG = DEFINED;
+        $CUR_VAR_DEF_FLAG = DEFINED;
         double var_val = $VISIT_CALC($R);
         $CUR_VAR_VAL = var_val;
 
         $WRITE_OPCDE(mov_rax_const);
-        $WRITE_CONST((int)var_val * 100, int);
+        $WRITE_CONST((int)(var_val * 100), int);
     }
         
     else
     {
-        PRINT_LINE
-        $CUR_VAR_FLAG = UNDEFINED;
+        $CUR_VAR_DEF_FLAG = UNDEFINED;
 
         visit_check_var_const_use_rax($R, vr_lists, fdata, jtable);
     }
@@ -283,7 +284,7 @@ int VWC_op_case          (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
     {
         case MUL:
         {
-            $WRITE_OPCDE(imul_rax_rdx);
+            $WRITE_OPCDE(imul_rax_rbx);
             $WRITE_OPCDE(idiv_rax_100); 
             break;
         }
@@ -299,9 +300,10 @@ int VWC_op_case          (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
         }
         case DIV:
         {
+            $WRITE_OPCDE(imul_rax_100);
             $WRITE_OPCDE(xor_rdx_rdx);
             $WRITE_OPCDE(div_rbx);
-            $WRITE_OPCDE(imul_rax_100);
+            
             break;
         }
         case DEG:
@@ -324,7 +326,14 @@ int VWC_var_case         (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
     int cur_var_hash = murmurHash($ND_STR, node->data_lng);
     int cur_var_num  = FindVariable(vr_lists, cur_var_hash);
 
-    $WRITE_CONST(cur_var_num * (-SIZE_OF_REG), int);
+    if ($CUR_VAR_PARAM_FLAG == FUNC_PARAM)
+    {
+        $WRITE_CONST((cur_var_num + 1) * SIZE_OF_REG, int);  // +1 is used, to deal with "push rbp"
+    }
+    else
+    {
+        $WRITE_CONST(cur_var_num * (-SIZE_OF_REG), int);
+    }
 
     return BREAK;
 }
@@ -351,20 +360,7 @@ int VWC_def_case         (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
 
     $VISIT_NEW_LIST($L, &vr_lists_new);
 
-    $WRITE_OPCDE(mov_r11_rbp);
-    $WRITE_OPCDE(pop_r12);
-    $WRITE_OPCDE(mov_rbp_rsp);
-
-    int arg_num = 1;
-    for (int i = vr_lists_new.free - 2 ; i >= 0 ; i--)
-    {
-        $WRITE_OPCDE(pop_mem_rbp);
-        $WRITE_CONST((1 + arg_num)  * (-SIZE_OF_REG), int); // this "+1" needed for correct stack rework
-        arg_num += 1;
-    }
-
-    $WRITE_OPCDE(push_r12);
-    $WRITE_OPCDE(push_r11);
+    $WRITE_OPCDE(push_rbp);
     $WRITE_OPCDE(mov_rbp_rsp);
     $WRITE_OPCDE(sub_rsp);
     int ip_sub_rsp = fdata->ip;                         // save current ip to rewrite it lately
@@ -400,6 +396,7 @@ int VWC_param_case       (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
     int tmp_hash = murmurHash(node->right->data.str, node->right->data_lng);
 
     $FREE_VAR.var_hash     = tmp_hash;
+    $FREE_VAR.param_flag   = FUNC_PARAM;
     $FREE += 1;
 
     $VISIT($L);
@@ -413,17 +410,20 @@ int VWC_call_param_case  (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
     {
         $WRITE_OPCDE(push_constant);
         $VISIT($R);
+        $VISIT($L);
     }
 
     if($R->data_type == VARIABLE)
     {
         $WRITE_OPCDE(push_mem_rbp);
         $VISIT($R);
+        $VISIT($L);
     }
     else
     {
         $VISIT($R);
         $WRITE_OPCDE(push_rax);
+        $VISIT($L);
     }
     
     return BREAK;
@@ -433,7 +433,7 @@ int VWC_call_case        (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
 {
     int func_hash = murmurHash($L->data.str, $L->data_lng);
     
-    int std_func_flag = VWC_call_case_std_func(node, vr_lists, fdata, jtable, func_hash);
+    int std_func_flag = VWC_call_case_std_func(node, vr_lists, fdata, jtable, func_hash); // check if std func called
 
     if (std_func_flag == STD_FUNC_DETECTED)
         return BREAK;
@@ -447,8 +447,22 @@ int VWC_call_case        (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPta
 
     $WRITE_OPCDE(call);
     $WRITE_CONST(func_ip - fdata->ip - sizeof(int), int);
+    pop_param_back($R, vr_lists, fdata, jtable);
 
     return BREAK;
+}
+//==========================================================================
+int pop_param_back         (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable)
+{
+    if ($R == NULL)
+        return CONITINUE;
+
+    $WRITE_OPCDE(pop_r12);
+
+    if ($L)
+        pop_param_back($R, vr_lists, fdata, jtable);
+
+    return CONITINUE;
 }
 //==========================================================================
 int VWC_call_case_std_func (Node* node, var_lists* vr_lists, ELFfile* fdata, JMPtable* jtable, int func_hash)
@@ -471,7 +485,7 @@ int VWC_call_case_std_func (Node* node, var_lists* vr_lists, ELFfile* fdata, JMP
         
         int cur_var_hash = murmurHash($R->right->data.str, $R->right->data_lng);
         int cur_var_num  = FindVariable(vr_lists, cur_var_hash);
-        $CUR_VAR_FLAG = UNDEFINED;
+        $CUR_VAR_DEF_FLAG = UNDEFINED;
 
         return STD_FUNC_DETECTED;
     }
@@ -758,7 +772,7 @@ int VisitCheckDefinedVal(Node* node, var_lists* vr_lists, int* def_value)
             int cur_var_hash = murmurHash($ND_STR, node->data_lng);
             int cur_var_num  = FindVariable(vr_lists, cur_var_hash);
             
-            if ($CUR_VAR_FLAG == UNDEFINED)
+            if ($CUR_VAR_DEF_FLAG == UNDEFINED)
                 *def_value = UNDEFINED;
             
             break;
@@ -892,7 +906,7 @@ int murmurHash (char * key, unsigned int len)
 #undef $ND_LNG
 #undef $ND_TYP
 
-#undef $CUR_VAR_FLAG
+#undef $CUR_VAR_DEF_FLAG
 #undef $CUR_VAR_HASH
 #undef $CUR_VAR_VAL
 

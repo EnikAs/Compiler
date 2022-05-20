@@ -9,10 +9,16 @@ const int MAX_CODE_LEN = 2048;
 const int MAX_FUNC_CUNT = 100;
 const int SIZE_OF_REG = 8;
 
-enum var_def
+enum def_flag
 {
     UNDEFINED = 0,
     DEFINED = 1
+};
+
+enum param_flag
+{
+    NOT_FUNC_PARAM = 0,
+    FUNC_PARAM = 1
 };
 
 enum while_flag
@@ -59,6 +65,7 @@ struct var_list
     int var_hash = 0;
     int var_value = 0;
     int def_flag = UNDEFINED;
+    int param_flag = NOT_FUNC_PARAM;
 };
 
 struct var_lists
