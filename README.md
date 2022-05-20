@@ -99,6 +99,7 @@ L1:
 
 + **Аll arguments are passed through the stack.**
 + **Functions returns its values in `rax` register.**
+
 **Example of sum(x, y) function**
 ``` cpp
 sum(x, y)
