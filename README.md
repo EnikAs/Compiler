@@ -98,7 +98,52 @@ L1:
 ## Functions
 
 + **Аll arguments are passed through the stack.**
-+ **Functions returns its values in 'rax' register.**
++ **Functions returns its values in `rax` register.**
+**Example of sum(x, y) function**
+``` cpp
+sum(x, y)
+{
+    zvOnit x + y;
+}
+x = 5;
+y = 12;
+
+z = sum(x, y);
+$
+```
+``` asm
+            ; at the start I have standart functions
+            ; You can check code at asm_instructions.h
+
+            push rbp
+            mov rbp, rsp
+            sub rsp, 0x18
+sum:
+            jmp skip_sum
+            push rbp
+            mov rbp, rsp
+            sub rsp, 0x10
+            mov rax, [rbp + 0x10]       ; rax = x;
+            mov rbx, [rbp + 0x18]       ; rbx = y;
+            add rax, rbx                ; rax = x + y
+            mov rsp, rbp
+            pop rbp
+            ret
+skip_sum:
+            mov rax, 0x1f4
+            mov [rbp - 8], rax          ; x = 0x1f4 = 0d500
+            mov rax, 0x4b0
+            mov [rbp - 0x10], rax       ; y = 0x4b0 = 0d1200
+            push qword [rbp - 8]
+            push qword [rbp - 0x10]
+            call sum
+            pop r12                     ; pop sum args from stack
+            pop r12                     ; pop sum args from stack
+            mov [rbp - 0x18], rax
+            mov eax, 1  
+            mov ebx, 0
+            int 0x80                    ;exit
+```
 
 ## Adition
 
