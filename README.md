@@ -4,6 +4,7 @@ This project is a direct continuation of the language, which translated the prog
 
 But this compiler translates code written in my language into X86-64 architectural instructions and creates an executable file based on them.
 
+For example, a program that calculates the factorial of 5 for 1000000 times has become **140** times faster.
 ## Syntax
 
 + **Each line must end with a `;` character.**
