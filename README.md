@@ -6,34 +6,28 @@ But this compiler translates code written in my language into X86-64 architectur
 
 ## Syntax
 
-### Each line must end with a ";" character.
-### Programm must end with "$" character.
-
-+ #### Instead of "if", i have "tortbl"
-
-+ #### Instead of "while", i have "pinzhak"
-
-+ #### Instead of "else", i have "lattE"
-
-+ #### Instead of "return", i have "zvOnit"
-
-+ #### Instead of "=", i have "lOzhit"
-
-+ #### Instead of "{", i have "word_stress"
-
-+ #### Instead of "}", i have "for_weak_people"
++ **Each line must end with a `;` character.**
++ **Programm must end with `$` character.**
+    + **Instead of `if`, i have `tortbl`**
+    + **Instead of `while", i have `pinzhak`**
+    + **Instead of `else`, i have `lattE`**
+    + **Instead of `return`, i have `zvOnit`**
+    + **Instead of `=`, i have `lOzhit`**
+    + **Instead of `{`, i have `word_stress`**
+    + **Instead of `}`, i have `for_weak_people`**
 
 As you can see, this is the language of wrong stresses in words, and just wrong words in Russian.
 
-### But "=", "{", "}" can also be used.
+**But `=`, `{`, `}` can also be used.**
+
 ------------------------------------------
-+ #### Standart function print() have only one(!) variable (or constant) as input and displays its value on the screen
++ **Standart function print() have only one(!) variable (or constant) as input and displays its value on the screen**
 
-+ #### Standart function scan() have only one(!) variable as input, it takes a integer(!) value from the keyboard and puts it in a variable
++ **Standart function scan() have only one(!) variable as input, it takes a integer(!) value from the keyboard and puts it in a variable**
 
-+ #### I also have a standard sqrt() function that takes one value (variable or constant) as input and returns its square root.
++ **I also have a standard sqrt() function that takes one value (variable or constant) as input and returns its square root.**
 
-### Other parts of syntax are similar with C syntax
+**Other parts of syntax are similar with C syntax**
 
 -----------------------------------------------
 # Examples of translation for basic constructions
@@ -50,7 +44,7 @@ lattE
     x = 0
 }
 ```
-### Translates into
+**Translates into**
 
 ``` asm
 
@@ -66,7 +60,7 @@ L1:                             ; jump to skip else
         mov [rbp - 8], rax
 L2:
 ```
-### Actually, its translated into this, but i will skip binary version next
+**Actually, its translated into this, but i will skip binary version next**
 ``` asm
 48 c7 c3 00 00 00 00      ;mov rbx, 0
 48 8b 85 f8 ff ff ff      ;mov rax, [rbp - 8]
@@ -86,7 +80,7 @@ pinzhak (x >= 0)
     x = x - 1;
 }
 ```
-### Translates into
+**Translates into**
 
 ```
 L2:
@@ -103,32 +97,35 @@ L1:
 ```
 ## Functions
 
-+ ### Аll arguments are passed through the stack. 
-+ ### Functions returns its values in 'rax' register.
++ **Аll arguments are passed through the stack.**
++ **Functions returns its values in 'rax' register.**
 
 ## Adition
 
-#### As you can see, all values ​​are multiplied by a factor of 100 (in the examples, 0x64 is used instead of 1). 
-#### This done to have a fractional part of the numbers, since I work with integers.
-#### So, if you will try to output 1/3, print() will give you "0.33" 
+**As you can see, all values ​​are multiplied by a factor of 100 (in the examples, 0x64 is used instead of 1).**
+
+**This done to have a fractional part of the numbers, since I work with integers.**
+
+**So, if you will try to output 1/3, print() will give you "0.33"**
 
 ## Optimisation 
 
-### I also made a backend optimization that simplifies the counting of variables whose value is known before the program is executed
-#### For example
+**I also made a backend optimization that simplifies the counting of variables whose value is known before the program is executed**
+
+**For example**
 ``` cpp
     x = 10;
     y = x + 5;
 ```
-#### Before execution, you can say that x will be equal to 10 and y will be 15.
-#### And because of that, asm code of my programm will be:
+**Before execution, you can say that `x` will be equal to 10 and `y` will be 15.**
+**And because of that, asm code of my programm will be:**
 ``` asm 
           mov rax, 0x3e8
           mov [rbp - 8], rax
           mov rax, 0x5dc
           mov [rbp - 0x10], rax
 ```
-#### Instead of 
+**Instead of**
 ``` asm
           mov rax, 0x3e8
           mov [rbp - 8], rax
