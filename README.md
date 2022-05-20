@@ -10,7 +10,7 @@ For example, a program that calculates the factorial of 5 for 1000000 times has 
 + **Each line must end with a `;` character.**
 + **Programm must end with `$` character.**
     + **Instead of `if`, i have `tortbl`**
-    + **Instead of `while", i have `pinzhak`**
+    + **Instead of `while`, i have `pinzhak`**
     + **Instead of `else`, i have `lattE`**
     + **Instead of `return`, i have `zvOnit`**
     + **Instead of `=`, i have `lOzhit`**
