@@ -182,17 +182,7 @@ skip_sum:
           mov [rbp- 0x10], rax
 
 ```
+# Results
 
-
-
-
-
-
-
-
-
-
-
-
-
+A program that calculates the factorial of 5 for 1000000 times has become **140** times faster.
 
